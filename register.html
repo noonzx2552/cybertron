@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!--=============== REMIXICONS ===============-->
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+   <!--=============== CSS ===============-->
+   <link rel="stylesheet" href="assets/css/styles.css">
+
+   <title>Animated login form - Bedimcode</title>
+</head>
+<body>
+   <div class="login">
+      <img src="assets/img/login-bg.png" alt="login image" class="login__img">   
+      <form action="http://localhost/animated-login-form/register.php" method="POST" class="login__form" onsubmit="return validatePassword()">
+         <h1 class="login__title">Register</h1>
+   
+         <div class="login__content">
+            <div class="login__box">
+               <i class="ri-user-3-line login__icon"></i>
+               <div class="login__box-input">
+                  <input type="text" required class="login__input" id="login-email" name="username" placeholder="">
+                  <label for="login-email" class="login__label">Username</label>
+               </div>
+            </div>
+   
+            <div class="login__box">
+               <i class="ri-lock-2-line login__icon"></i>
+               <div class="login__box-input">
+                  <input type="password" required class="login__input" id="login-pass" name="password" placeholder="">
+                  <label for="login-pass" class="login__label">Password</label>
+                  <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+               </div>
+            </div>
+            <span id="password-error" class="login__error"></span>
+         </div>
+         <button type="submit" class="login__button" style="margin-top: 20px;">Register</button>
+         <p class="login__register">
+            Have an account? <a href="login.php">login</a>
+         </p>
+      </form>
+   </div>
+
+   <!--=============== MAIN JS ===============-->
+   <script src="assets/js/main.js"></script>
+
+   <script>
+      // ฟังก์ชันตรวจสอบรหัสผ่าน
+      function validatePassword() {
+         const password = document.getElementById("login-pass").value;
+         const passwordError = document.getElementById("password-error");
+
+         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_])[A-Za-z\d!@#$%^&*_]{6,}$/;
+
+         // เคลียร์ข้อความผิดพลาดก่อนการตรวจสอบ
+         passwordError.textContent = "";
+         passwordError.style.display = "none"; // ซ่อนข้อความผิดพลาดในตอนแรก
+
+         if (!regex.test(password)) {
+            passwordError.textContent = "Password must be at least 6 characters long, with lowercase, uppercase, a number, and a special character.";
+            passwordError.style.display = "block"; // แสดงข้อความข้อผิดพลาดเมื่อไม่ตรงเงื่อนไข
+            return false;  // ห้ามส่งฟอร์ม
+         }
+         return true;  // ถ้ารหัสผ่านถูกต้อง ส่งฟอร์มได้
+      }
+
+      // รีไดเร็กต์ไปที่ login.php หลังจากโหลดหน้า
+      window.location.href = "login.php";
+   </script>
+</body>
+</html>

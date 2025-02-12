@@ -23,4 +23,22 @@ const showHiddenPass = (loginPass, loginEye) =>{
    })
 }
 
+// ฟังก์ชันตรวจสอบรหัสผ่าน
+function validatePassword() {
+   const password = document.getElementById("register-pass").value;
+   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+
+   if (!regex.test(password)) {
+      alert("Password must be at least 6 characters long, with lowercase, uppercase, a number, and a special character.");
+      return false;
+   }
+   return true;
+}
+
+function flip() {
+   const loginContainer = document.querySelector('.login-container');
+   loginContainer.classList.toggle('flipped');
+}
+
+
 showHiddenPass('login-pass','login-eye')

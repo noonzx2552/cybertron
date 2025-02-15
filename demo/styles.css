@@ -1,0 +1,122 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2e0355, #4d0a8c);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    padding: 15px 40px;
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+.nav-left {
+    font-weight: bold;
+}
+
+.nav-right a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-right a:hover {
+    color: #b184ff;
+}
+
+/* Content Section */
+.content-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    color: #ffffff;
+}
+
+.content-box {
+    padding: 40px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0); /* Fully transparent box */
+    max-width: 1000px;
+    color: #ffffff;
+}
+
+.content-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #ffffff;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.content-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.content-text {
+    text-align: left;
+    font-size: 1.3rem;
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+.content-text ul {
+    list-style-type: disc;
+    padding-left: 40px;
+}
+
+.content-text ul li {
+    margin-bottom: 10px;
+}
+
+/* Footer Buttons (Invisible) */
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0); /* Fully transparent */
+    border-top: none;
+}
+
+footer button {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    color: #121212;
+    background: #ffa500;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+footer button:hover {
+    background: #ff8800;
+}
+
+.next-button {
+    background: #4caf50;
+}
+
+.next-button:hover {
+    background: #45a049;
+}

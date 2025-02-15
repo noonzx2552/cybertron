@@ -19,45 +19,49 @@ $registration_error = "";
 
 // ตรวจสอบเมื่อผู้ใช้ส่งข้อมูลผ่าน POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // รับค่าจากฟอร์มและตัดช่องว่างด้านหน้า-หลังของ username
-    $username = trim($_POST['username']);
-    $password = $_POST['password'];
+   // รับค่าจากฟอร์มและตัดช่องว่างด้านหน้า-หลังของ username
+   $username = trim($_POST['username']);
+   $password = $_POST['password'];
 
-    // ตรวจสอบว่ารหัสผ่านตรงตามเงื่อนไขหรือไม่
-    if (strlen($password) < 6) {
-        $registration_error = "Password must be at least 6 characters long.";
-    } else {
-        // ตรวจสอบว่า username มีอยู่ในฐานข้อมูลหรือไม่
-        $sql = "SELECT * FROM users WHERE username = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username);  // กำหนดให้ username เป็น string
-        $stmt->execute();
-        $result = $stmt->get_result();
+   // ตรวจสอบว่ารหัสผ่านตรงตามเงื่อนไขหรือไม่
+   if (strlen($password) < 6) {
+       $registration_error = "Password must be at least 6 characters long.";
+   } else {
+       // ตรวจสอบว่า username มีอยู่ในฐานข้อมูลหรือไม่
+       $sql = "SELECT * FROM users WHERE username = ?";
+       $stmt = $conn->prepare($sql);
+       $stmt->bind_param("s", $username);
+       $stmt->execute();
+       $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            // ถ้ามี username ซ้ำ ให้เก็บข้อความผิดพลาดใน $_SESSION
-            $_SESSION['registration_error'] = "Username already exists. Please choose a different one.";
-        } else {
-            // ถ้าไม่มีซ้ำ ให้เข้ารหัสรหัสผ่านแล้วเพิ่มข้อมูลลงในฐานข้อมูล
-            $password = $_POST['password'];
+       if ($result->num_rows > 0) {
+           // ถ้ามี username ซ้ำ ให้เก็บข้อความผิดพลาดใน $_SESSION
+           $_SESSION['registration_error'] = "Username already exists. Please choose a different one.";
+       } else {
+           // **บันทึกรหัสผ่านโดยไม่เข้ารหัส**
+         $sql_insert = "INSERT INTO users (username, password, start_date, 
+         chapter_1_status, chapter_2_status, chapter_3_status, 
+         chapter_4_status, chapter_5_status, chapter_6_status) 
+         VALUES (?, ?, NOW(), 'not_started', 'not_started', 'not_started', 
+         'not_started', 'not_started', 'not_started')";
 
-            // เก็บรหัสผ่านในฐานข้อมูลโดยไม่เข้ารหัส
-            $sql_insert = "INSERT INTO users (username, password) VALUES (?, ?)";
-            $stmt_insert = $conn->prepare($sql_insert);
-            $stmt_insert->bind_param("ss", $username, $password);
-            
-            if ($stmt_insert->execute()) {
-                header("Location: login.php");
-                exit();
-            } else {
-                $registration_error = "Error: " . $stmt_insert->error;
-            }
-            $stmt_insert->close();
-            
-        }
-        $stmt->close();
-    }
+         $stmt_insert = $conn->prepare($sql_insert);
+         $stmt_insert->bind_param("ss", $username, $password);
+         $stmt_insert->execute();
+
+
+           if ($stmt_insert->execute()) {
+               header("Location: login.php");
+               exit();
+           } else {
+               $registration_error = "Error: " . $stmt_insert->error;
+           }
+           $stmt_insert->close();
+       }
+       $stmt->close();
+   }
 }
+
 
 $conn->close();
 ?>

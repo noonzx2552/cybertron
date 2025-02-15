@@ -1,0 +1,140 @@
+/* lab.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2E0249;
+    color: #F806CC;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #570A57;
+    color: #F806CC;
+}
+
+.nav-left {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-right a {
+    color: #F806CC;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.nav-right a:hover {
+    color: #A91079;
+}
+
+.content-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.styled-input {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #A91079;
+    border-radius: 5px;
+    background-color: #2E0249;
+    color: #F806CC;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #A91079;
+    color: #F806CC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #570A57;
+    transform: scale(1.05);
+}
+
+.footer-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #A91079;
+    color: #F806CC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #570A57;
+}
+
+/* Animation for correct and wrong answers */
+@keyframes correctAnswer {
+    0% {
+        background-color: #2E0249;
+    }
+    50% {
+        background-color: #00FF00;
+    }
+    100% {
+        background-color: #2E0249;
+    }
+}
+
+@keyframes wrongAnswer {
+    0% {
+        background-color: #2E0249;
+    }
+    50% {
+        background-color: #FF0000;
+    }
+    100% {
+        background-color: #2E0249;
+    }
+}
+
+.correct {
+    animation: correctAnswer 1s ease-in-out;
+}
+
+.wrong {
+    animation: wrongAnswer 1s ease-in-out;
+}

@@ -1,0 +1,283 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #ffffff; /* White text for better contrast */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw; /* Full viewport width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center everything horizontally */
+    justify-content: flex-start; /* Align content to the top */
+    overflow: auto; /* Allow scrolling if content overflows */
+    background: linear-gradient(135deg, #1a1a1a, #2e1a47, #1a1a1a); /* Black and purple gradient */
+    background-size: 200% 200%; /* Larger background size for animation */
+    animation: GradientBackground 15s ease infinite; /* Smooth gradient animation */
+}
+
+/* Gradient Animation */
+@keyframes GradientBackground {
+    0% {
+        background-position: 0% 50%; /* Start position */
+    }
+    50% {
+        background-position: 100% 50%; /* Middle position */
+    }
+    100% {
+        background-position: 0% 50%; /* End position */
+    }
+}
+
+/* Moving Pattern Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(106, 27, 154, 0.1) 10%, transparent 10%); /* Dot pattern */
+    background-size: 40px 40px; /* Size of the dots */
+    animation: MovePattern 10s linear infinite; /* Animate the pattern */
+    pointer-events: none; /* Ensure it doesn't interfere with clicks */
+}
+
+/* Pattern Animation */
+@keyframes MovePattern {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 40px; /* Move the pattern diagonally */
+    }
+}
+
+/* Header Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(46, 26, 71, 0.8); /* Dark purple with 80% opacity */
+    padding: 15px 20px; /* Reduced padding for narrower screen */
+    color: #ffffff;
+    font-size: 1.5rem; /* Slightly smaller font size */
+    width: 100%; /* Full width */
+    box-sizing: border-box;
+    position: fixed; /* Fixed at the top */
+    top: 0; /* Stick to the top */
+    z-index: 1000; /* Ensure it stays above other content */
+    backdrop-filter: blur(5px); /* Blur effect for modern look */
+}
+
+.nav-left {
+    font-weight: bold;
+}
+
+.nav-right a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px; /* Reduced margin for narrower screen */
+    font-weight: bold;
+    font-size: 1.2rem; /* Slightly smaller font size */
+    transition: color 0.3s ease;
+}
+
+.nav-right a:hover {
+    color: #b184ff; /* Light purple on hover */
+}
+
+/* Content Section */
+.content-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    align-items: flex-start; /* Align content to the left */
+    padding: 80px 20px 20px; /* Adjusted padding for fixed header */
+    text-align: left; /* Left-align text */
+    color: #ffffff; /* White text for better contrast */
+    width: 100%; /* Full width */
+    max-width: 800px; /* Narrower max-width for 1080px screen */
+    box-sizing: border-box;
+    margin-top: 60px; /* Space for fixed header */
+    margin-bottom: 60px; /* Space for fixed footer */
+}
+
+.content-section h1 {
+    font-size: 2rem; /* Slightly smaller font size */
+    margin-bottom: 20px; /* Reduced margin */
+    color: #ffffff; /* White text */
+    border-bottom: 3px solid #ffffff; /* White underline */
+    display: inline-block;
+    padding-bottom: 5px; /* Reduced padding */
+}
+
+.content-text {
+    font-size: 1.1rem; /* Slightly smaller font size */
+    line-height: 1.6; /* Adjusted line height */
+    width: 100%; /* Full width */
+}
+
+.content-text p {
+    margin-bottom: 20px; /* Reduced margin */
+}
+
+.content-text ul {
+    list-style-type: disc;
+    padding-left: 30px; /* Reduced padding */
+    margin-bottom: 20px; /* Reduced margin */
+}
+
+.content-text ul li {
+    margin-bottom: 10px; /* Reduced margin */
+}
+
+/* Footer Buttons */
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px; /* Reduced padding for narrower screen */
+    width: 100%; /* Full width */
+    box-sizing: border-box;
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0; /* Stick to the bottom */
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+footer button {
+    padding: 10px 20px; /* Reduced padding */
+    font-size: 1.2rem; /* Slightly smaller font size */
+    color: #ffffff; /* White text */
+    background: transparent; /* Transparent background */
+    border: 2px solid #ffffff; /* White border */
+    border-radius: 8px; /* Slightly rounded corners */
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+footer button:hover {
+    background: #ffffff; /* White background on hover */
+    color: #1a1a1a; /* Dark text on hover */
+}
+
+.next-button {
+    border-color: #4caf50; /* Green border for next button */
+    color: #4caf50; /* Green text for next button */
+}
+
+.next-button:hover {
+    background: #4caf50; /* Green background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    background: transparent;
+    color: #ffffff;
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #ff9a3c;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.submit-button:hover {
+    background: #ff9a3c;
+    color: #1a1a1a;
+}
+/* Pop-up Styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    z-index: 1001; /* Above everything */
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #1a1a1a; /* Dark background */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: popupFadeIn 0.5s ease;
+    position: relative; /* Ensure close button is positioned correctly */
+}
+
+.popup-content p {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.popup-image {
+    width: 100px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.close-popup:hover {
+    color: #b184ff; /* Light purple on hover */
+}
+
+/* Pop-up Animation */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

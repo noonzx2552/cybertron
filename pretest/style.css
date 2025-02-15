@@ -1,0 +1,315 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(115deg, rgba(2,0,36,1) 0%, rgba(46,9,121,1) 50%, rgba(206,187,255,1) 100%);
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
+    display: flex; /* ใช้ Flexbox */
+    justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
+    align-items: center; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.quiz-container, .result-container {
+    background-color: rgba(26, 26, 26, 0.8); /* สีดำอ่อนแบบโปร่งแสง */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(128, 0, 128, 0.5); /* เงาสีม่วง */
+    text-align: center;
+    max-width: 700px;
+    width: 90%; /* ปรับให้กว้าง 90% ของหน้าจอ */
+    position: relative;
+    z-index: 1; /* ให้กรอบคำถามอยู่เหนือพื้นหลัง */
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #bb86fc; /* สีม่วงอ่อน */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #6200ee; /* สีม่วงเข้ม */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3700b3; /* สีม่วงเข้มกว่าเมื่อโฮเวอร์ */
+}
+
+#question-container {
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: rgba(51, 51, 51, 0.8); /* สีเทาเข้มแบบโปร่งแสง */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.option:hover {
+    background-color: rgba(68, 68, 68, 0.8); /* สีเทาอ่อนกว่าเมื่อโฮเวอร์ */
+    transform: scale(1.02); /* ขยายตัวเล็กน้อยเมื่อโฮเวอร์ */
+}
+
+.option.selected {
+    background-color: #03dac6; /* สีฟ้าเขียว */
+    color: #000000; /* ข้อความสีดำ */
+}
+
+.result-container {
+    display: none;
+}
+
+#score {
+    font-size: 1.5em;
+    color: #bb86fc; /* สีม่วงอ่อน */
+}
+
+.boxes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.single-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.single-box li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 20s linear infinite;
+    bottom: -150px;
+}
+
+.single-box li:nth-child(1) {
+    left: 86%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+.single-box li:nth-child(2) {
+    left: 12%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 1.5s;
+    animation-duration: 10s;
+}
+.single-box li:nth-child(3) {
+    left: 29%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 5.5s;
+}
+.single-box li:nth-child(4) {
+    left: 42%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+}
+.single-box li:nth-child(5) {
+    left: 65%;
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+}
+.single-box li:nth-child(6) {
+    left: 15%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3.5s;
+}
+.single-box li:nth-child(7) {
+    left: 75%;
+    width: 200px;
+    height: 200px;
+    animation-delay: 4.5s;
+    bottom: -250px;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-800px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.option {
+    color: #ffffff; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* จัดให้ปุ่มอยู่ชิดซ้ายและขวา */
+    margin-top: 20px; /* เพิ่มระยะห่างด้านบน */
+}
+
+#prev-button {
+    background-color: #757575; /* สีเทา */
+    margin-right: 10px; /* เพิ่มระยะห่างจากปุ่ม "ต่อไป" */
+}
+
+#prev-button:hover {
+    background-color: #616161; /* สีเทาเข้มกว่าเมื่อโฮเวอร์ */
+}
+
+#next-button {
+    background-color: #6200ee; /* สีม่วงเข้ม */
+    color: #ffffff;
+}
+
+#next-button:hover {
+    background-color: #3700b3; /* สีม่วงเข้มกว่าเมื่อโฮเวอร์ */
+}
+
+.cybertron-title {
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-shadow: 0 0 10px #bb86fc, 0 0 20px #bb86fc, 0 0 30px #bb86fc, 0 0 40px #6200ee;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 5px;
+}
+
+.typing-text {
+    font-size: 24px;
+    font-weight: 600;
+    min-width: 280px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 250px; /* เพิ่มค่า top เพื่อขยับข้อความลง */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.typing-text span {
+    position: relative;
+}
+
+.typing-text span::before {
+    content: "Strong Passwords, Stronger Security!";
+    color: #cebbff;
+    animation: words 20s infinite;
+}
+
+.typing-text span::after {
+    content: "";
+    background-color:transparent;
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 100%;
+    border-left: 3px solid black;
+    right: -8px;
+    animation: cursor 0.6s infinite;
+}
+
+@keyframes cursor {
+    to {
+        border-left: 3px solid #cebbff;
+    }
+}
+
+@keyframes words {
+    0%, 20% {
+        content: "Privacy is power";
+    }
+    21%, 40% {
+        content: "One weak link can break the chain";
+    }
+    41%, 60% {
+        content: "Don’t Take the Bait – Avoid Phishing!";
+    }
+    61%, 80% {
+        content: "Think before you click";
+    }
+    81%, 100% {
+        content: "Lock Your Data, Guard Your Privacy!";
+    }
+}
+
+.clock {
+    position: absolute;
+    top: 10px; /* วางที่มุมบน */
+    right: 10px; /* วางที่มุมขวา */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.animation-text {
+    position: absolute;
+    bottom: 20px; /* วางที่มุมล่าง */
+    left: 20px;  /* วางที่มุมซ้าย */
+    color: white;
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+
+#animation-text::after {
+    content: "";
+    display: inline-block;
+    width: 3px; /* 🔹 ทำให้เคอร์เซอร์บางลง */
+    height: 20px; /* 🔹 ปรับให้สูงเท่ากับตัวอักษร */
+    background-color: #cebbff; /* 🔹 สีม่วง */
+    margin-left: 3px; /* 🔹 ระยะห่างระหว่างตัวอักษรกับเคอร์เซอร์ */
+    animation: blink 0.6s infinite alternate;
+    vertical-align: middle; /* ✅ ทำให้เคอร์เซอร์อยู่ตรงกลาง */
+    transform: translateY(-2px); /* ✅ ขยับขึ้นเล็กน้อย */
+}
+
+
+@keyframes blink {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}

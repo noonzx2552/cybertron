@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2a0e4f;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            color: #c084fc;
+        }
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+        input[type="range"] {
+            width: 60%;
+        }
+        .mute-button {
+            background: #c084fc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .mute-button:hover {
+            background: #a06cd5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Settings</h1>
+        <div class="setting-item">
+            <label for="musicVolume">Background Music</label>
+            <input type="range" id="musicVolume" min="0" max="100" value="50">
+        </div>
+        <div class="setting-item">
+            <label for="sfxVolume">SFX Volume</label>
+            <input type="range" id="sfxVolume" min="0" max="100" value="50">
+        </div>
+        <button class="mute-button" id="muteMusic">Mute Music</button>
+        <button class="mute-button" id="muteSfx">Mute SFX</button>
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="music/background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        const musicVolume = document.getElementById('musicVolume');
+        const muteMusic = document.getElementById('muteMusic');
+
+        // ตั้งค่าเริ่มต้นให้เล่นเพลง
+        music.volume = musicVolume.value / 100;
+        music.play();
+
+        // ปรับเสียงตาม Slider
+        musicVolume.addEventListener('input', function() {
+            music.volume = this.value / 100;
+        });
+
+        // ปุ่ม Mute
+        muteMusic.addEventListener('click', function() {
+            if (music.muted) {
+                music.muted = false;
+                muteMusic.textContent = "Mute Music";
+            } else {
+                music.muted = true;
+                muteMusic.textContent = "Unmute Music";
+            }
+        });
+    </script>
+
+</body>
+</html>

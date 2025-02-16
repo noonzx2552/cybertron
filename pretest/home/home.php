@@ -304,20 +304,46 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Progress</title>
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="setting/style.css">
 </head>
 <body>
+    <!-- Navigation Menu -->
+    <div class="nav">
+        <input type="checkbox" id="menu-toggle" />
+        <svg>
+            <use xlink:href="#MENU1" />
+            <use xlink:href="#MENU1" />
+        </svg>
+    </div>
+
+    <!-- ปุ่ม SETTING และ LOGOUT (ซ่อนก่อน) -->
+    <div class="menu-buttons">
+    <button class="home-btn">DASHBOARD</button>
+    <button id="setting-btn" class="setting-btn">SETTING</button>
+    <button class="logout-btn">LOGOUT</button>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="MENU1">
+        <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
+    </symbol>
+    </svg>
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="settings-modal">
+        <div class="settings-content">
+            <h2>Settings</h2>
+            <label for="bgm-volume">BGM Volume:</label>
+            <input type="range" id="bgm-volume" min="0" max="1" step="0.001" value="1">
+            <label for="sfx-volume">SFX Volume:</label>
+            <input type="range" id="sfx-volume" min="0" max="1" step="0.001" value="1">
+            <label for="mute">Mute:</label>
+            <input type="checkbox" id="mute">
+            <button id="close-settings">Close</button>
+        </div>
+    </div>
     <header class="navbar">
         <div class="nav-left"><?php echo htmlspecialchars($username); ?></div>
-        <nav class="nav-right">
-            <?php if ($score_completed && $status_completed): ?>
-                <a href="dashboard.php">Dashboard</a>
-            <?php else: ?>
-            <?php endif; ?>
-            <a href="setting.html">Setting</a>
-            <a onclick="location.href='/animated-login-form/logout.php'">Logout</a>
-        </nav>
     </header>
-
+        <!-- Navigation Menu -->
     <section class="content-section">
         <h1>Learning Progress</h1>
         <p class="welcome-text">Welcome <?php echo htmlspecialchars($username); ?></p>
@@ -375,9 +401,14 @@ $conn->close();
                     </a>
                 </div>
                 <div class="unit">
-                    <a href="posttest.php" style="color: <?php echo isset($posttest_score) && !is_null($posttest_score) ? 'green' : 'white'; ?>;">
-                        Post-test<br>
-                    </a>
+                    <!-- แสดงหรือซ่อนปุ่ม Post-test -->
+                    <?php if ($status_completed): ?>
+                        <div class="unit">
+                            <a href="posttest.php" style="color: <?php echo isset($posttest_score) && !is_null($posttest_score) ? 'green' : 'white'; ?>;">
+                                Post-test<br>
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -464,5 +495,7 @@ $conn->close();
     // Start creating fireflies
     createFireflies();
 </script>
+<script src="script.js"></script>
+<script src="setting/script.js"></script>
 </body>
 </html>

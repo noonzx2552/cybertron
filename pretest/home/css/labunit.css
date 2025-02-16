@@ -54,21 +54,18 @@ body::before {
 }
 
 /* Header Navigation */
+/* Header Navigation */
 .navbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(46, 26, 71, 0.8); /* Dark purple with 80% opacity */
-    padding: 15px 20px; /* Reduced padding for narrower screen */
+    justify-content: flex-start; /* จัดให้อยู่ด้านซ้าย */
+    align-items: center; /* จัดให้อยู่ตรงกลางในแนวตั้ง */
+    padding: 15px 40px;
     color: #ffffff;
-    font-size: 1.5rem; /* Slightly smaller font size */
-    width: 100%; /* Full width */
-    box-sizing: border-box;
-    position: fixed; /* Fixed at the top */
-    top: 0; /* Stick to the top */
-    z-index: 1000; /* Ensure it stays above other content */
-    backdrop-filter: blur(5px); /* Blur effect for modern look */
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-align: left; /* จัดข้อความชิดซ้าย */
 }
+
 
 .nav-left {
     font-weight: bold;

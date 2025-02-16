@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 // ดึงค่า chapter_1_status และ Unit1
-$sql = "SELECT chapter_2_status, Unit2 FROM users WHERE username = ?";
+$sql = "SELECT chapter_4_status, Unit4 FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $logged_in_user);
 $stmt->execute();
@@ -31,7 +31,7 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $stmt->close();
 
-$unit2_score = $row['Unit2']; // คะแนน Unit1 ปัจจุบัน
+$unit4_score = $row['Unit4']; // คะแนน Unit1 ปัจจุบัน
 
 // ตรวจสอบคำตอบที่ส่งมาทาง POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
 
     if ($user_answer === $correct_answer) {
         // ถ้าผู้ใช้ตอบถูกต้อง ให้บันทึก chapter_1_status เป็น "completed"
-        $update_sql = "UPDATE users SET chapter_2_status = 'completed' WHERE username = ?";
+        $update_sql = "UPDATE users SET chapter_4_status = 'completed' WHERE username = ?";
         $stmt = $conn->prepare($update_sql);
         $stmt->bind_param("s", $logged_in_user);
         $stmt->execute();
@@ -50,16 +50,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
         exit();
     } else {
         // ถ้าผิด ลดค่า Unit1 ลง 1 แต่ไม่ให้ต่ำกว่า 0
-        if ($unit2_score > 0) {
-            $new_unit2_score = $unit2_score - 1;
-            $update_sql = "UPDATE users SET Unit2 = ? WHERE username = ?";
+        if ($unit4_score > 0) {
+            $new_unit4_score = $unit4_score - 1;
+            $update_sql = "UPDATE users SET Unit4 = ? WHERE username = ?";
             $stmt = $conn->prepare($update_sql);
-            $stmt->bind_param("is", $new_unit2_score, $logged_in_user);
+            $stmt->bind_param("is", $new_unit4_score, $logged_in_user);
             $stmt->execute();
             $stmt->close();
         }
 
-        echo json_encode(["status" => "incorrect", "unit" => $new_unit2_score ?? $unit2_score]);
+        echo json_encode(["status" => "incorrect", "unit1" => $new_unit4_score ?? $unit4_score]);
         exit();
     }
 }

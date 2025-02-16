@@ -287,13 +287,12 @@ $stmt->close();
                             color: '#fff'
                         },
                         ticks: {
-                            color: '#fff',
-                            backdropColor: 'transparent'
+                            display: false,
                         }
                     }
                 },
                 plugins: {
-                    legend: {
+                    legend: { 
                         labels: {
                             color: '#fff'
                         }

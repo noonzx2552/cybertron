@@ -22,14 +22,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// ดึงค่า chapter_1_status
-$sql = "SELECT chapter_1_status FROM users WHERE username = ?";
+// ดึงค่า chapter_1_status และ Unit1
+$sql = "SELECT chapter_1_status, Unit1 FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $logged_in_user);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $stmt->close();
+
+$unit1_score = $row['Unit1']; // คะแนน Unit1 ปัจจุบัน
 
 // ตรวจสอบคำตอบที่ส่งมาทาง POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
@@ -47,7 +49,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
         echo json_encode(["status" => "correct"]);
         exit();
     } else {
-        echo json_encode(["status" => "incorrect"]);
+        // ถ้าผิด ลดค่า Unit1 ลง 1 แต่ไม่ให้ต่ำกว่า 0
+        if ($unit1_score > 0) {
+            $new_unit1_score = $unit1_score - 1;
+            $update_sql = "UPDATE users SET Unit1 = ? WHERE username = ?";
+            $stmt = $conn->prepare($update_sql);
+            $stmt->bind_param("is", $new_unit1_score, $logged_in_user);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        echo json_encode(["status" => "incorrect", "unit1" => $new_unit1_score ?? $unit1_score]);
         exit();
     }
 }

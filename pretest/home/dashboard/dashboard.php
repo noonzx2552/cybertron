@@ -158,19 +158,20 @@ $stmt->close();
         <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
     </symbol>
     </svg>
-    <!-- Settings Modal -->
-    <div id="settings-modal" class="settings-modal">
-        <div class="settings-content">
-            <h2>Settings</h2>
-            <label for="bgm-volume">BGM Volume:</label>
-            <input type="range" id="bgm-volume" min="0" max="1" step="0.001" value="1">
-            <label for="sfx-volume">SFX Volume:</label>
-            <input type="range" id="sfx-volume" min="0" max="1" step="0.001" value="1">
-            <label for="mute">Mute:</label>
-            <input type="checkbox" id="mute">
-            <button id="close-settings">Close</button>
-        </div>
+<!-- Settings Modal -->
+<div id="settings-modal" class="settings-modal">
+    <div class="settings-content">
+        <h2>Settings</h2>
+        <label for="bgm-volume">BGM Volume:</label>
+        <input type="range" id="bgm-volume" min="0" max="1" step="0.001" value="1">
+        <label for="sfx-volume">SFX Volume:</label>
+        <input type="range" id="sfx-volume" min="0" max="1" step="0.001" value="1">
+        <label for="mute">Mute:</label>
+        <input type="checkbox" id="mute">
+        <button id="close-settings">Close</button>
     </div>
+</div>
+
     
 
     <div class="dashboard-container">

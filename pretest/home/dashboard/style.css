@@ -233,59 +233,90 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    transition: opacity 0.3s ease; /* เพิ่มการแสดง/ซ่อนอย่างนุ่มนวล */
+}
+
+.settings-modal.show {
+    display: flex;
+    opacity: 1; /* ความทึบของ modal เมื่อแสดง */
 }
 
 .settings-content {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
+    background-color: #2e2e2e;
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
     text-align: center;
     color: white;
-    box-shadow: 0 0 20px rgba(147, 112, 219, 0.5);
+    box-shadow: 0 0 20px rgba(147, 112, 219, 0.7);
+    animation: modal-animate 0.5s ease-out;
+}
+
+@keyframes modal-animate {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .settings-content h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
+    margin-bottom: 30px;
+    font-size: 26px;
     color: #bb86fc;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 1px;
 }
 
 .settings-content label {
     display: block;
-    margin: 15px 0 5px;
-    font-size: 16px;
+    margin: 20px 0 5px;
+    font-size: 18px;
     color: #bb86fc;
 }
 
 .settings-content input[type="range"] {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     background: #bb86fc;
-    border-radius: 5px;
-    height: 5px;
+    border-radius: 10px;
+    height: 8px;
     outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.settings-content input[type="range"]:hover {
+    background-color: #3700b3;
 }
 
 .settings-content input[type="checkbox"] {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .settings-content button {
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background-color: #6200ee;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .settings-content button:hover {
     background-color: #3700b3;
+    transform: scale(1.05);
 }
+
+.settings-content button:active {
+    transform: scale(0.98); /* เพิ่ม effect เมื่อคลิก */
+}
+
 
 
 .nav {

@@ -70,12 +70,16 @@ $update_stmt = $conn->prepare($update_sql);
 
 if ($update_stmt) {
     $update_stmt->bind_param("s", $username);
-    $update_stmt->execute(); // ✅ เพิ่มบรรทัดนี้
     $update_stmt->close();
-}
-else {
+} else {
     echo "❌ SQL Error: " . $conn->error;
 }
+
+$conn = new mysqli($servername, $db_username, $db_password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 // สมมติว่าได้ค่า $row จากฐานข้อมูลแล้ว
 $chapter_status = [
     'chapter_1_status' => $row['chapter_1_status'],
@@ -314,7 +318,7 @@ $conn->close();
 
     <!-- ปุ่ม SETTING และ LOGOUT (ซ่อนก่อน) -->
     <div class="menu-buttons">
-    <button class="dash-btn" onclick="changePage()" >DASHBOARD</button>
+    <button class="dash-btn">DASHBOARD</button>
     <button id="setting-btn" class="setting-btn">SETTING</button>
     <button class="logout-btn">LOGOUT</button>
     </div>
@@ -336,8 +340,8 @@ $conn->close();
             <button id="close-settings">Close</button>
         </div>
     </div>
-<audio id="bgm" loop autoplay muted>
-    <source src="../../assets/sound/bgm.mp3" type="audio/mpeg">
+    <audio id="bgm" loop autoplay muted>
+    <source src="bgm.mp3" type="audio/mpeg">
 </audio>
 <audio id="sfx">
     <source src="sfx.mp3" type="audio/mpeg">
@@ -498,30 +502,8 @@ $conn->close();
 
     // Start creating fireflies
     createFireflies();
-
 </script>
-<script>
-    const audio = document.getElementById('bgm');
-
-    // บันทึกสถานะเพลงก่อนเปลี่ยนหน้าเว็บ
-    window.addEventListener('beforeunload', () => {
-        localStorage.setItem('audioCurrentTime', audio.currentTime);
-        localStorage.setItem('audioPlaying', !audio.paused);
-    });
-
-    // ดึงสถานะเพลงเมื่อโหลดหน้าใหม่
-    window.addEventListener('load', () => {
-        const savedTime = parseFloat(localStorage.getItem('audioCurrentTime')) || 0;
-        const isPlaying = localStorage.getItem('audioPlaying') === 'true';
-
-        audio.currentTime = savedTime;
-        if (isPlaying) {
-            audio.play();
-        }
-    });
-</script>
-
-<script src="dashboard/script.js"></script>
+<script src="script.js"></script>
 <script src="setting/script.js"></script>
 </body>
 </html>

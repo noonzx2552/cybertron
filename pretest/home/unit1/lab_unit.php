@@ -1,14 +1,13 @@
 <?php
-session_start();
-$percentage = 90; // เปอร์เซ็นต์ความคืบหน้า
+session_start(); // เริ่มต้นเซสชัน
 
-// ตรวจสอบว่าผู้ใช้ล็อกอินหรือยัง
+// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-$username = $_SESSION['username'];
+$logged_in_user = $_SESSION['username']; // กำหนดค่าให้ถูกต้อง
 
 // เชื่อมต่อฐานข้อมูล
 $servername = "localhost";
@@ -17,42 +16,44 @@ $db_password = "";
 $dbname = "user_db";
 
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+// ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// ดึงค่า pretest_score และสถานะของแต่ละบท
-$sql = "SELECT pretest_score, posttest_score, congratulation, end_date, 
-               chapter_1_status, chapter_2_status, chapter_3_status, 
-               chapter_4_status, chapter_5_status, chapter_6_status 
-        FROM users WHERE username = ?";
-
+// ดึงค่า chapter_1_status
+$sql = "SELECT chapter_1_status FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("SQL Error: " . $conn->error);
-}
-
-$stmt->bind_param("s", $username);
+$stmt->bind_param("s", $logged_in_user);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $stmt->close();
 
-// ตรวจสอบสถานะ chapter_1_status ถ้ายังไม่เป็น "completed" ให้เปลี่ยนเป็น "in_progress"
-if ($row["chapter_1_status"] !== "completed") {
-    $new_status = "in_progress";
+// ตรวจสอบคำตอบที่ส่งมาทาง POST
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
+    $user_answer = trim($_POST["answer"]);
+    $correct_answer = "flag{correct_answer}"; // กำหนดคำตอบที่ถูกต้อง
 
-    $stmt = $conn->prepare("UPDATE users SET chapter_1_status = ? WHERE username = ?");
-    if ($stmt) {
-        $stmt->bind_param("ss", $new_status, $username);
+    if ($user_answer === $correct_answer) {
+        // ถ้าผู้ใช้ตอบถูกต้อง ให้บันทึก chapter_1_status เป็น "completed"
+        $update_sql = "UPDATE users SET chapter_1_status = 'completed' WHERE username = ?";
+        $stmt = $conn->prepare($update_sql);
+        $stmt->bind_param("s", $logged_in_user);
         $stmt->execute();
         $stmt->close();
+
+        echo json_encode(["status" => "correct"]);
+        exit();
+    } else {
+        echo json_encode(["status" => "incorrect"]);
+        exit();
     }
 }
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -64,7 +65,7 @@ $conn->close();
     <link rel="stylesheet" href="../bar/style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
-<span class="username-display"><?php echo htmlspecialchars($username); ?></span>
+<span class="username-display"><?php echo htmlspecialchars($logged_in_user); ?></span>
     
     <!-- Navigation Menu -->
     <div class="nav">
@@ -99,11 +100,11 @@ $conn->close();
         <button id="close-settings">Close</button>
     </div>
 </div>
-<!-- Header Navigation -->
+    <!-- Header Navigation -->
     <script defer src="../bar/script.js"></script>
 
     <section class="content-section">
-        <h1>Lab unit 1: Cybersecurity & Threat Prevention</h1>
+        <h1>Lab unit 1: Online Identity & Digital Footprint</h1>
 
         <div class="content-text">
             <p><strong>ตามหาข้อมูลจาก social media ของ username : @supersigma777</strong></p>

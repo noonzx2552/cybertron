@@ -39,20 +39,6 @@ muteCheckbox.addEventListener('change', (e) => {
     console.log('Mute:', isMuted);
 });
 
-window.onload = function() {
-    const music = document.getElementById('background-music');
-    // เริ่มเพลงเมื่อหน้าแรกโหลด
-    if (!music.paused) {
-        music.play();
-    }
-};
-
-function changePage() {
-    // เปลี่ยนหน้า (สามารถใช้ location.href หรือ location.assign เพื่อเปลี่ยนหน้า)
-    location.href = 'newpage.html';  // เปลี่ยนเป็น URL ของหน้าใหม่
-}
-
-
 const bgmAudio = document.getElementById('bgm');
 const sfxAudio = document.getElementById('sfx');
 // การบันทึกสถานะของ BGM เมื่อมีการเปลี่ยนแปลง
@@ -134,3 +120,12 @@ document.querySelector('.home-btn').addEventListener('click', function() {
 const menuButtons = document.querySelector(".menu-buttons");
 const toggleMenuButton = document.querySelector("#toggle-menu"); // ปุ่มเปิด-ปิดเมนู
 
+// การเปิด Modal
+document.getElementById('open-settings').addEventListener('click', function() {
+    document.getElementById('settings-modal').classList.add('show');
+});
+
+// การปิด Modal
+document.getElementById('close-settings').addEventListener('click', function() {
+    document.getElementById('settings-modal').classList.remove('show');
+});

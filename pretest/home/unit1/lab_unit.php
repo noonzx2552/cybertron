@@ -169,6 +169,10 @@ $conn->close();
             document.getElementById(id).style.display = "none";
         }
     </script>
+    <audio id="bgm" loop autoplay muted>
+        <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <script src="../dashboard/script.js"></script>
     <script defer src="script.js"></script>
     <script defer src="script_copy.js"></script>
 </body>

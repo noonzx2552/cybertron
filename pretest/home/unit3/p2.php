@@ -120,11 +120,14 @@ $conn->close();
             </ul>
         </div>
     </section>
-
+    <audio id="bgm" loop autoplay muted>
+        <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <script src="../dashboard/script.js"></script>
     <!-- Footer Buttons -->
     <footer class="footer-buttons">
         <button class="back-button" onclick="window.location.href='p1.php'">back</button>
-        <button class="next-button" onclick="window.location.href='lab.php'">next</button>
+        <button class="next-button" onclick="window.location.href='lab_unit3.php'">next</button>
     </footer>
 </body>
 </html>

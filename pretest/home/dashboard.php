@@ -304,5 +304,8 @@ $stmt->close();
     </script>
     <script src="script.js"></script>
     <script src="setting/script.js"></script>
+    <audio id="bgm" loop autoplay>
+        <source src="../../assets/sound/bgm.mp3" type="audio/mpeg">
+    </audio>
 </body>
 </html>

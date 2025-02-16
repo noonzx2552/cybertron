@@ -128,7 +128,11 @@ $conn->close();
     <!-- Footer Buttons -->
     <footer class="footer-buttons">
         <button class="back-button" onclick="window.location.href='../home.php'">back</button>
-        <button class="next-button" onclick="window.location.href='lab.php'">next</button>
-    </footer>
+        <button class="next-button" onclick="window.location.href='lab_unit4.php'">next</button>
+        <audio id="bgm" loop autoplay muted>
+        <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <script src="../dashboard/script.js"></script>
+    <script defer src="../setting/script.js"></script>
 </body>
 </html>

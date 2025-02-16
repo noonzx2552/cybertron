@@ -19,28 +19,71 @@ closeSettingsButton.addEventListener('click', () => {
 
 // ควบคุม BGM Volume
 bgmVolume.addEventListener('input', (e) => {
-    const volume = e.target.value;
-    // ใส่โค้ดควบคุม BGM Volume ตรงนี้
+    const volume = e.target.value / 100;  // เปลี่ยนจาก 0-100 เป็น 0-1
+    bgmAudio.volume = volume;
     console.log('BGM Volume:', volume);
 });
 
 // ควบคุม SFX Volume
 sfxVolume.addEventListener('input', (e) => {
-    const volume = e.target.value;
-    // ใส่โค้ดควบคุม SFX Volume ตรงนี้
+    const volume = e.target.value / 100;  // เปลี่ยนจาก 0-100 เป็น 0-1
+    sfxAudio.volume = volume;
     console.log('SFX Volume:', volume);
 });
 
 // ควบคุม Mute
 muteCheckbox.addEventListener('change', (e) => {
     const isMuted = e.target.checked;
-    // ใส่โค้ดควบคุม Mute ตรงนี้
+    bgmAudio.muted = isMuted;
+    sfxAudio.muted = isMuted;
     console.log('Mute:', isMuted);
 });
+
+window.onload = function() {
+    const music = document.getElementById('background-music');
+    // เริ่มเพลงเมื่อหน้าแรกโหลด
+    if (!music.paused) {
+        music.play();
+    }
+};
+
+function changePage() {
+    // เปลี่ยนหน้า (สามารถใช้ location.href หรือ location.assign เพื่อเปลี่ยนหน้า)
+    location.href = 'newpage.html';  // เปลี่ยนเป็น URL ของหน้าใหม่
+}
 
 
 const bgmAudio = document.getElementById('bgm');
 const sfxAudio = document.getElementById('sfx');
+// การบันทึกสถานะของ BGM เมื่อมีการเปลี่ยนแปลง
+let lastBgmTime = localStorage.getItem('bgmTime');
+
+// เมื่อหน้าโหลดใหม่ให้เช็คว่าเคยมีการบันทึกเวลาที่เล่น BGM ไว้หรือไม่
+document.addEventListener('DOMContentLoaded', () => {
+    if (lastBgmTime !== null) {
+        bgmAudio.currentTime = lastBgmTime; // ตั้งเวลาของเพลงตามที่เคยเล่นไว้
+    }
+    bgmAudio.muted = false; // ยกเลิก muted
+    bgmAudio.play(); // พยายามเล่นเสียงอีกครั้ง
+});
+
+// เมื่อเพลงเล่น จะบันทึกเวลาที่เล่นใน localStorage
+bgmAudio.addEventListener('timeupdate', () => {
+    localStorage.setItem('bgmTime', bgmAudio.currentTime);
+});
+
+// เมื่อปิดหรือโหลดหน้าใหม่ จะทำการลบสถานะของ BGM
+window.addEventListener('beforeunload', () => {
+    localStorage.removeItem('bgmTime');
+});
+
+// เพิ่มการควบคุมการเปิดปิดเสียงตามที่มีในโค้ดเดิม
+muteCheckbox.addEventListener('change', (e) => {
+    const isMuted = e.target.checked;
+    bgmAudio.muted = isMuted;
+    sfxAudio.muted = isMuted;
+});
+
 
 // ควบคุม BGM Volume
 bgmVolume.addEventListener('input', (e) => {
@@ -74,6 +117,7 @@ document.addEventListener('click', () => {
         bgmAudio.play();
     }
 }, { once: true }); // ให้ทำงานแค่ครั้งเดียว
+
 document.querySelector('.logout-btn').addEventListener('click', function() {
     window.location.href = '../../logout.php'; // Redirect to logout.php
 });

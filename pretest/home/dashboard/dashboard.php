@@ -149,7 +149,7 @@ $stmt->close();
 
     <!-- ปุ่ม SETTING และ LOGOUT (ซ่อนก่อน) -->
     <div class="menu-buttons">
-        <button class="home-btn">HOME</button>
+        <button class="home-btn" onclick="changePage()">HOME</button>
         <button id="setting-btn" class="setting-btn">SETTING</button>
         <button class="logout-btn">LOGOUT</button>
     </div>
@@ -301,6 +301,30 @@ $stmt->close();
             }
         });
     </script>
+    <script>
+        const audio = document.getElementById('bgm');
+
+        // บันทึกสถานะเพลงก่อนเปลี่ยนหน้าเว็บ
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('audioCurrentTime', audio.currentTime);
+            localStorage.setItem('audioPlaying', !audio.paused);
+        });
+
+        // ดึงสถานะเพลงเมื่อโหลดหน้าใหม่
+        window.addEventListener('load', () => {
+            const savedTime = parseFloat(localStorage.getItem('audioCurrentTime')) || 0;
+            const isPlaying = localStorage.getItem('audioPlaying') === 'true';
+
+            audio.currentTime = savedTime;
+            if (isPlaying) {
+                audio.play();
+            }
+        });
+    </script>
     <script defer src="script.js"></script>
+
+    <audio id="bgm" loop autoplay>
+        <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
+    </audio>
 </body>
 </html>

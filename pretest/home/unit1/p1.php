@@ -98,9 +98,11 @@ $conn->close();
             <button id="close-settings">Close</button>
         </div>
     </div>
+    <script ></script>
+
     <!-- Header Navigation -->
     <script defer src="../bar/script.js"></script>
-
+    <script defer src="../setting/script.js"></script>
     <!-- Content Section -->
     <section class="content-section">
         <h1>Online Identity & Digital Footprint</h1>
@@ -130,6 +132,10 @@ $conn->close();
         <button class="back-button" onclick="window.location.href='../home.php'">back</button>
         <button class="next-button" onclick="window.location.href='p2.php'">next</button>
     </footer>
-
+    <audio id="bgm" loop autoplay muted>
+        <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <script src="../dashboard/script.js"></script>
+<script src="setting/script.js"></script>
 </body>
 </html>

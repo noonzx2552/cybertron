@@ -318,7 +318,7 @@ $conn->close();
 
     <!-- ปุ่ม SETTING และ LOGOUT (ซ่อนก่อน) -->
     <div class="menu-buttons">
-    <button class="home-btn">DASHBOARD</button>
+    <button class="dash-btn">DASHBOARD</button>
     <button id="setting-btn" class="setting-btn">SETTING</button>
     <button class="logout-btn">LOGOUT</button>
     </div>

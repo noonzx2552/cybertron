@@ -424,7 +424,7 @@ body {
     }
 }
 
-.setting-btn, .logout-btn, .dashboard-btn, .home-btn{
+.setting-btn, .logout-btn, .dashboard-btn, .dash-btn{
     padding: 10px;
     background-color: transparent;
     color: white;
@@ -435,7 +435,7 @@ body {
     transition: text-shadow 0.3s ease-in-out; /* เพิ่ม transition เพื่อให้มีการเปลี่ยนแปลงนุ่มนวล */
 }
 
-.setting-btn:hover, .logout-btn:hover, .dashboard-btn:hover, .home-btn:hover {
+.setting-btn:hover, .logout-btn:hover, .dashboard-btn:hover, .dash-btn:hover {
     background-color: transparent;
     text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white; /* ฟอนต์เรืองแสงสีขาว */
 }

@@ -128,12 +128,16 @@ document.querySelector('.logout-btn').addEventListener('click', function() {
     window.location.href = '../../logout.php'; // Redirect to logout.php
 });
 
-document.querySelector('.home-btn').addEventListener('click', function() {
-    window.location.href = 'home.php'; // Redirect to logout.php
+document.querySelector('.dash-btn').addEventListener('click', function() {
+    window.location.href = 'dashboard/dashboard.php'; // Redirect to logout.php
 });
 
 document.getElementById("menu-toggle").addEventListener("change", function() {
     document.querySelector(".menu-buttons").classList.toggle("active");
+});
+
+document.querySelector('.home-btn').addEventListener('click', function() {
+    window.location.href = 'home.php'; // Redirect to logout.php
 });
 
 const menuButtons = document.querySelector(".menu-buttons");

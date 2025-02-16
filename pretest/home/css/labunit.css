@@ -153,10 +153,7 @@ footer button {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-footer button:hover {
-    background: #ffffff; /* White background on hover */
-    color: #1a1a1a; /* Dark text on hover */
-}
+
 
 .next-button {
     border-color: #4caf50; /* Green border for next button */
@@ -222,18 +219,25 @@ footer button:hover {
 .popup {
     display: none; /* Hidden by default */
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the popup */
+    width: 80%; /* Adjust the width as needed */
+    max-width: 600px; /* Maximum width */
+    height: auto; /* Adjust height based on content */
+    background: transparent; /* Semi-transparent black background */
     z-index: 1001; /* Above everything */
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
+    padding: 20px; /* Add some padding */
+    box-sizing: border-box; /* Include padding in width/height */
+    border-radius: 10px; /* Optional: Add rounded corners */
 }
 
 .popup-content {
+    top: 50%;
+    left: 12.5%;
     background: #1a1a1a; /* Dark background */
     padding: 20px;
     border-radius: 10px;

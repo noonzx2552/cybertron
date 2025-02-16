@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
 
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -61,50 +62,49 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab Unit 1: Online Identity & Digital Footprint</title>
     <link rel="stylesheet" href="../css/labunit.css"> <!-- Link to the CSS file -->
-
     <link rel="stylesheet" href="../bar/style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
-<span class="username-display"><?php echo htmlspecialchars($logged_in_user); ?></span>
-    
-    <!-- Navigation Menu -->
-    <div class="nav">
-    <input type="checkbox" id="menu-toggle" />
-    <svg>
-        <use xlink:href="#MENU1" />
-        <use xlink:href="#MENU1" />
-    </svg>
-</div>
-
-<!-- ปุ่ม SETTING และ LOGOUT (ซ่อนก่อน) -->
-<div class="menu-buttons">
-    <button class="home-btn">HOME</button>
-    <button id="setting-btn" class="setting-btn">SETTING</button>
-    <button class="logout-btn">LOGOUT</button>
-</div>
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="MENU1">
-    <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
-</symbol>
-</svg>
-<!-- Settings Modal -->
-<div id="settings-modal" class="settings-modal">
-    <div class="settings-content">
-        <h2>Settings</h2>
-        <label for="bgm-volume">BGM Volume:</label>
-        <input type="range" id="bgm-volume" min="0" max="1" step="0.001" value="1">
-        <label for="sfx-volume">SFX Volume:</label>
-        <input type="range" id="sfx-volume" min="0" max="1" step="0.001" value="1">
-        <label for="mute">Mute:</label>
-        <input type="checkbox" id="mute">
-        <button id="close-settings">Close</button>
+    <span class="username-display"><?php echo htmlspecialchars($logged_in_user); ?></span>
+<!-- Navigation Menu -->
+<div class="nav">
+        <input type="checkbox" id="menu-toggle" />
+        <svg>
+            <use xlink:href="#MENU1" />
+            <use xlink:href="#MENU1" />
+        </svg>
     </div>
-</div>
+
+    <!-- ปุ่ม SETTING และ LOGOUT (ซ่อนก่อน) -->
+    <div class="menu-buttons">
+        <button class="home-btn">HOME</button>
+        <button id="setting-btn" class="setting-btn">SETTING</button>
+        <button class="logout-btn">LOGOUT</button>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="MENU1">
+        <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
+    </symbol>
+    </svg>
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="settings-modal">
+        <div class="settings-content">
+            <h2>Settings</h2>
+            <label for="bgm-volume">BGM Volume:</label>
+            <input type="range" id="bgm-volume" min="0" max="1" step="0.001" value="1">
+            <label for="sfx-volume">SFX Volume:</label>
+            <input type="range" id="sfx-volume" min="0" max="1" step="0.001" value="1">
+            <label for="mute">Mute:</label>
+            <input type="checkbox" id="mute">
+            <button id="close-settings">Close</button>
+        </div>
+    </div>
     <!-- Header Navigation -->
     <script defer src="../bar/script.js"></script>
 
+
     <section class="content-section">
-        <h1>Lab unit 1: Online Identity & Digital Footprint</h1>
+        <h1>Lab unit 6: Cybersecurity & Threat Prevention</h1>
 
         <div class="content-text">
             <p><strong>ตามหาข้อมูลจาก social media ของ username : @supersigma777</strong></p>
@@ -141,7 +141,6 @@ $conn->close();
             <p>Try again! 😅</p>
         </div>
     </div>
-    
 
     <script>
         function checkAnswer() {
@@ -170,11 +169,5 @@ $conn->close();
             document.getElementById(id).style.display = "none";
         }
     </script>
-    <audio id="bgm" loop autoplay muted>
-        <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
-    </audio>
-    <script src="../dashboard/script.js"></script>
-    <script defer src="script.js"></script>
-    <script defer src="script_copy.js"></script>
 </body>
 </html>

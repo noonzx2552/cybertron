@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz เว็บไซต์</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="cybertron-title">CYBERTRON</h1>
+    <div id="clock" class="clock"></div> <!-- Div สำหรับนาฬิกา -->
+
+    <audio id="correct-sound" src="XCorrect.mp3"></audio>
+    <audio id="wrong-sound" src="XWrong.mp3"></audio>
+
+
+    <div class="boxes">
+        <ul class="single-box">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="quiz-container">
+        <h1>Post-test</h1>
+        <div id="question-container">
+            <!-- คำถามและตัวเลือกจะถูกเพิ่มโดย JavaScript -->
+        </div>
+        <div class="button-container">
+            <button id="prev-button" onclick="prevQuestion()">ย้อนกลับ</button>
+            <button id="next-button" onclick="nextQuestion()">ต่อไป</button>
+        </div>
+    </div>
+
+    <div class="result-container">
+        <h1>ผลลัพธ์</h1>
+        <p id="score"></p>
+        <button onclick="restartQuiz()">เริ่มใหม่</button>
+        <a href="../home.php">
+            <button>ไปหน้าต่อไป</button>
+        </a>
+        
+    </div>
+    <div id="animation-text" class="animation-text"></div> <!-- Div สำหรับแสดงข้อความอนิเมชั่น -->
+    <div id="cybertron-text" class="typing-effect"></div>
+    <script src="script.js"></script>
+</body>
+</html>

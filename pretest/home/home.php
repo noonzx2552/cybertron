@@ -284,7 +284,7 @@ if ($score_completed && $status_completed && $congratulation == 0) {
         <script>
             // Redirect หลังจาก 5 วินาที
             setTimeout(function() {
-                window.location.href = "dashboard.php";
+                window.location.href = "dashboard/dashboard.php";
             }, 5000); // 5 วินาที
         </script>
     </body>
@@ -359,7 +359,7 @@ $conn->close();
         <div class="progress-container">
             <div class="unit-list">
                 <div class="unit top-units">
-                    <a href="../index.html" style="color: <?php echo $pretest_completed ? 'green' : 'black'; ?>;">
+                    <a href="../index.html" style="color: <?php echo $pretest_completed ? 'green' : 'white'; ?>;">
                         Pre-test<br>
                     </a>
                 </div>
@@ -412,7 +412,7 @@ $conn->close();
                     <!-- แสดงหรือซ่อนปุ่ม Post-test -->
                     <?php if ($status_completed): ?>
                         <div class="unit">
-                            <a href="posttest.php" style="color: <?php echo isset($posttest_score) && !is_null($posttest_score) ? 'green' : 'white'; ?>;">
+                            <a href="posttest/index.html" style="color: <?php echo isset($posttest_score) && !is_null($posttest_score) ? 'green' : 'white'; ?>;">
                                 Post-test<br>
                             </a>
                         </div>

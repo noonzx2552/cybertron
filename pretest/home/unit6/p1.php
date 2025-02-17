@@ -102,7 +102,7 @@ $conn->close();
 
     <!-- Content Section -->
     <section class="content-section">
-        <h1>Cybersecurity & Threat Prevention</h1>
+        <h1>6|Cybersecurity & Threat Prevention</h1>
 
         <div class="content-text">
             <p><strong>1. ความสำคัญของความปลอดภัยทางไซเบอร์</strong><br>

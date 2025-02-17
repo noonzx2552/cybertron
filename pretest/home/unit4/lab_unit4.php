@@ -36,10 +36,10 @@ $unit4_score = $row['Unit4']; // คะแนน Unit1 ปัจจุบัน
 // ตรวจสอบคำตอบที่ส่งมาทาง POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
     $user_answer = trim($_POST["answer"]);
-    $correct_answer = "flag{correct_answer}"; // กำหนดคำตอบที่ถูกต้อง
+    $correct_answers = ["Worm", "เวิร์ม"]; // คำตอบที่ถูกต้อง
 
-    if ($user_answer === $correct_answer) {
-        // ถ้าผู้ใช้ตอบถูกต้อง ให้บันทึก chapter_1_status เป็น "completed"
+    if (in_array($user_answer, $correct_answers)) {
+        // ถ้าผู้ใช้ตอบถูกต้อง ให้บันทึก chapter_4_status เป็น "completed"
         $update_sql = "UPDATE users SET chapter_4_status = 'completed' WHERE username = ?";
         $stmt = $conn->prepare($update_sql);
         $stmt->bind_param("s", $logged_in_user);
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
         echo json_encode(["status" => "correct"]);
         exit();
     } else {
-        // ถ้าผิด ลดค่า Unit1 ลง 1 แต่ไม่ให้ต่ำกว่า 0
+        // ถ้าผิด ลดค่า Unit4 ลง 1 แต่ไม่ให้ต่ำกว่า 0
         if ($unit4_score > 0) {
             $new_unit4_score = $unit4_score - 1;
             $update_sql = "UPDATE users SET Unit4 = ? WHERE username = ?";
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
             $stmt->close();
         }
 
-        echo json_encode(["status" => "incorrect", "unit1" => $new_unit4_score ?? $unit4_score]);
+        echo json_encode(["status" => "incorrect", "unit4" => $new_unit4_score ?? $unit4_score]);
         exit();
     }
 }
@@ -72,7 +72,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Unit 1: Online Identity & Digital Footprint</title>
+    <title>Lab Unit 4</title>
     <link rel="stylesheet" href="../css/labunit.css"> <!-- Link to the CSS file -->
     <link rel="stylesheet" href="../bar/style.css"> <!-- Link to the CSS file -->
 </head>
@@ -116,11 +116,11 @@ $conn->close();
 
 
     <section class="content-section">
-        <h1>Lab unit 6: Cybersecurity & Threat Prevention</h1>
+        <h1>Lab unit 4: Malware & Threats</h1>
 
         <div class="content-text">
-            <p><strong>ตามหาข้อมูลจาก social media ของ username : @supersigma777</strong></p>
-            <p><strong>ลักษณะ flag ของคำตอบคือ flag{answer}</strong></p>
+            <p><strong>มัลแวร์ที่แพร่กระจายได้เองโดยไม่ต้องมีไฟล์พาหะ คือมัลแวร์ชนิดใด</strong></p>
+            <p><strong></strong></p>
 
             <div class="input-group">
                 <label for="answer">Answer or flag:</label>
@@ -142,7 +142,9 @@ $conn->close();
         <div class="popup-content">
             <span class="close-popup" onclick="closePopup('correct-popup')">&times;</span>
             <p>Correct! Well done! 🎉</p>
-            <img src="thumbs-up.png" alt="Thumbs Up" class="popup-image">
+
+            <!-- เพิ่มปุ่ม Back to Home --><br>
+            <button onclick="window.location.href='../home.php'" class="backtohome">Back to Home</button>
         </div>
     </div>
 

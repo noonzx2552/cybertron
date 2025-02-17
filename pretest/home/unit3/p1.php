@@ -25,7 +25,7 @@ if ($conn->connect_error) {
 $sql = "SELECT pretest_score, posttest_score, congratulation, end_date, 
                chapter_1_status, chapter_2_status, chapter_3_status, 
                chapter_4_status, chapter_5_status, chapter_6_status 
-        FROM users WHERE username = ?";     
+        FROM users WHERE username = ?";
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
@@ -38,7 +38,7 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $stmt->close();
 
-// ตรวจสอบสถานะ chapter_1_status ถ้ายังไม่เป็น "completed" ให้เปลี่ยนเป็น "in_progress"
+// ตรวจสอบสถานะ chapter_3_status ถ้ายังไม่เป็น "completed" ให้เปลี่ยนเป็น "in_progress"
 if ($row["chapter_3_status"] !== "completed") {
     $new_status = "in_progress";
 
@@ -60,12 +60,20 @@ $conn->close();
     <title>Passwords & Authentication</title>
     <link rel="stylesheet" href="../chapter/css/style.css"> <!-- Link to the CSS file -->
     <link rel="stylesheet" href="../bar/style.css"> <!-- Link to the CSS file -->
+    <style>
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <span class="username-display"><?php echo htmlspecialchars($username); ?></span>
     
-        <!-- Navigation Menu -->
-        <div class="nav">
+    <!-- Navigation Menu -->
+    <div class="nav">
         <input type="checkbox" id="menu-toggle" />
         <svg>
             <use xlink:href="#MENU1" />
@@ -80,10 +88,11 @@ $conn->close();
         <button class="logout-btn">LOGOUT</button>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="MENU1">
-        <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
-    </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="MENU1">
+            <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
+        </symbol>
     </svg>
+
     <!-- Settings Modal -->
     <div id="settings-modal" class="settings-modal">
         <div class="settings-content">
@@ -97,13 +106,14 @@ $conn->close();
             <button id="close-settings">Close</button>
         </div>
     </div>
+
     <!-- Header Navigation -->
     <script defer src="../bar/script.js"></script>
+    <script defer src="../setting/script.js"></script>
 
-    <!-- Content Section -->
-    <section class="content-section">
-        <h1>Passwords & Authentication</h1>
-
+    <!-- Content Sections -->
+    <section id="content1" class="content-section active">
+        <h1>3|Passwords & Authentication</h1>
         <div class="content-text">
             <p><strong>1. ความสำคัญของรหัสผ่าน</strong><br>
             รหัสผ่านเป็นเครื่องมือสำคัญในการป้องกันข้อมูลส่วนตัวและบัญชีออนไลน์ หากใช้รหัสผ่านที่อ่อนแอหรือซ้ำกัน อาจทำให้บัญชีถูกแฮกได้ง่าย</p>
@@ -121,14 +131,65 @@ $conn->close();
             </ul>
         </div>
     </section>
+
+    <section id="content2" class="content-section">
+        <h1>Passwords & Authentication (ต่อ)</h1>
+        <div class="content-text">
+            <p><strong>3. การพิสูจน์ตัวตนแบบหลายปัจจัย (Multi-Factor Authentication - MFA)</strong><br>
+            MFA เป็นการเพิ่มชั้นการรักษาความปลอดภัย เช่น:</p>
+            <ul>
+                <li>รหัสผ่าน + OTP ที่ส่งไปยังมือถือ</li>
+                <li>รหัสผ่าน + การยืนยันตัวตนด้วยโปรแกรม (ลายนิ้วมือหรือใบหน้า)</li>
+            </ul>
+
+            <p><strong>4. แนวทางป้องกันการถูกขโมยรหัสผ่าน</strong></p>
+            <ul>
+                <li>ไม่กรอกรหัสผ่านในเว็บไซต์ที่ไม่น่าเชื่อถือ</li>
+                <li>เปิดใช้งาน MFA ทุกครั้งที่ทำได้</li>
+                <li>ตรวจสอบกิจกรรมการเข้าสู่ระบบจากอุปกรณ์ที่ไม่รู้จัก</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer Buttons -->
+    <footer class="footer-buttons">
+        <button class="back-button" onclick="handleBackButton()">back</button>
+        <button class="next-button" onclick="handleNextButton()">next</button>
+    </footer>
+
     <audio id="bgm" loop autoplay muted>
         <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
     </audio>
     <script src="../dashboard/script.js"></script>
-    <!-- Footer Buttons -->
-    <footer class="footer-buttons">
-        <button class="back-button" onclick="window.location.href='../home.php'">back</button>
-        <button class="next-button" onclick="window.location.href='p2.php'">next</button>
-    </footer>
+    <script>
+        let currentContent = 1; // เริ่มต้นที่ส่วนแรก
+
+        function showContent(contentId) {
+            // ซ่อนเนื้อหาทั้งหมด
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // แสดงเนื้อหาที่ต้องการ
+            document.getElementById(`content${contentId}`).classList.add('active');
+            currentContent = contentId; // อัปเดตส่วนที่แสดงอยู่
+        }
+
+        function handleBackButton() {
+            if (currentContent === 1) {
+                window.location.href = '../home.php'; // ไปหน้า ../home.php
+            } else if (currentContent > 1) {
+                showContent(currentContent - 1); // กลับไปส่วนก่อนหน้า
+            }
+        }
+
+        function handleNextButton() {
+            if (currentContent < 2) {
+                showContent(currentContent + 1); // ไปยังส่วนถัดไป
+            } else if (currentContent === 2) {
+                window.location.href = 'lab_unit3.php'; // ไปหน้า lab_unit3.php
+            }
+        }
+    </script>
 </body>
 </html>

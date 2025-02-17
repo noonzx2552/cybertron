@@ -36,7 +36,7 @@ $unit2_score = $row['Unit2']; // คะแนน Unit1 ปัจจุบัน
 // ตรวจสอบคำตอบที่ส่งมาทาง POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
     $user_answer = trim($_POST["answer"]);
-    $correct_answer = "flag{correct_answer}"; // กำหนดคำตอบที่ถูกต้อง
+    $correct_answer = 'Voice Phishing'; // กำหนดคำตอบที่ถูกต้อง
 
     if ($user_answer === $correct_answer) {
         // ถ้าผู้ใช้ตอบถูกต้อง ให้บันทึก chapter_1_status เป็น "completed"
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
             $stmt->close();
         }
 
-        echo json_encode(["status" => "incorrect", "unit" => $new_unit2_score ?? $unit2_score]);
+        echo json_encode(["status" => "incorrect", "unit2" => $new_unit2_score ?? $unit2_score]);
         exit();
     }
 }
@@ -72,7 +72,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Unit 1: Online Identity & Digital Footprint</title>
+    <title>Lab Unit 1</title>
     <link rel="stylesheet" href="../css/labunit.css"> <!-- Link to the CSS file -->
     <link rel="stylesheet" href="../bar/style.css"> <!-- Link to the CSS file -->
 </head>
@@ -106,7 +106,7 @@ $conn->close();
             <input type="range" id="bgm-volume" min="0" max="1" step="0.001" value="1">
             <label for="sfx-volume">SFX Volume:</label>
             <input type="range" id="sfx-volume" min="0" max="1" step="0.001" value="1">
-            <label for="mute">Mute:</label>
+            <label for="mute">Mute:</label><br>
             <input type="checkbox" id="mute">
             <button id="close-settings">Close</button>
         </div>
@@ -116,11 +116,11 @@ $conn->close();
 
 
     <section class="content-section">
-        <h1>Lab unit 6: Cybersecurity & Threat Prevention</h1>
+        <h1>Lab unit 2: Phishing & Social Engineering</h1>
 
         <div class="content-text">
-            <p><strong>ตามหาข้อมูลจาก social media ของ username : @supersigma777</strong></p>
-            <p><strong>ลักษณะ flag ของคำตอบคือ flag{answer}</strong></p>
+            <p><strong>ประเภทของ Phishing Attacks  ที่ใช้โทรศัพท์ปลอมตัวเป็นบุคคลสำคัญ คือประเภทอะไร</strong></p>
+
 
             <div class="input-group">
                 <label for="answer">Answer or flag:</label>
@@ -142,9 +142,13 @@ $conn->close();
         <div class="popup-content">
             <span class="close-popup" onclick="closePopup('correct-popup')">&times;</span>
             <p>Correct! Well done! 🎉</p>
-            <img src="thumbs-up.png" alt="Thumbs Up" class="popup-image">
+
+            <!-- เพิ่มปุ่ม Back to Home --><br>
+            <button onclick="window.location.href='../home.php'" class="backtohome">Back to Home</button>
         </div>
     </div>
+
+
 
     <!-- Pop-up for Incorrect Answer -->
     <div id="incorrect-popup" class="popup">

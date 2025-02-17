@@ -290,3 +290,16 @@ footer button {
 .popup {
     display: none;
 }
+.backtohome {
+    background-color: #4CAF50; /* สีพื้นหลัง */
+    color: white; /* สีข้อความ */
+    padding: 10px 20px; /* ขนาด padding */
+    border: none; /* ไม่มีเส้นขอบ */
+    border-radius: 5px; /* มุมโค้ง */
+    cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็น pointer */
+    font-size: 16px; /* ขนาดฟอนต์ */
+}
+
+.backtohome:hover {
+    background-color: #45a049; /* สีพื้นหลังเมื่อ hover */
+}

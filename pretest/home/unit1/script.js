@@ -1,23 +1,33 @@
-function checkAnswer() {
-    var answer = document.getElementById("answer").value;
+let currentSection = 1;
 
-    fetch("check_answer.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "answer=" + encodeURIComponent(answer)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === "correct") {
-            document.getElementById("correct-popup").style.display = "block";
-        } else {
-            document.getElementById("incorrect-popup").style.display = "block";
-        }
-    })
-    .catch(error => console.error("Error:", error));
+function showSection(sectionNumber) {
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(`section${sectionNumber}`).classList.add('active');
 }
 
-function closePopup(id) {
-    document.getElementById(id).style.display = "none";
+function nextSection() {
+    if (currentSection < 2) {
+        currentSection++;
+        showSection(currentSection);
+    } else if (currentSection === 2) {
+        // ถ้าอยู่ในส่วนที่ 2 ให้ไปยังหน้า lab_unit.php
+        window.location.href = 'lab_unit.php';
+    }
 }
 
+function prevSection() {
+    if (currentSection > 1) {
+        currentSection--;
+        showSection(currentSection);
+    }
+}
+
+function handleBackButton() {
+    if (currentContent === 'content1') {
+        window.location.href = '../home.php'; // ไปหน้า home.php
+    } else if (currentContent === 'content2') {
+        showContent('content1'); // กลับไปส่วนแรก
+    }
+}

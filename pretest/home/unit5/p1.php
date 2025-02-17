@@ -102,7 +102,7 @@ $conn->close();
 
     <!-- Content Section -->
     <section class="content-section">
-        <h1>Safe Browsing & Online Scams</h1>
+        <h1>5|Safe Browsing & Online Scams</h1>
 
         <div class="content-text">
             <p><strong>1. การท่องเน็ตอย่างปลอดภัย</strong></p>

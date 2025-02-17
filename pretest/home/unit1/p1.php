@@ -61,12 +61,20 @@ $conn->close();
     <title>Online Identity & Digital Footprint</title>
     <link rel="stylesheet" href="../chapter/css/style.css"> <!-- Link to the CSS file -->
     <link rel="stylesheet" href="../bar/style.css"> <!-- Link to the CSS file -->
+    <style>
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <span class="username-display"><?php echo htmlspecialchars($username); ?></span>
     
-        <!-- Navigation Menu -->
-        <div class="nav">
+    <!-- Navigation Menu -->
+    <div class="nav">
         <input type="checkbox" id="menu-toggle" />
         <svg>
             <use xlink:href="#MENU1" />
@@ -81,10 +89,11 @@ $conn->close();
         <button class="logout-btn">LOGOUT</button>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="MENU1">
-        <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
-    </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56" id="MENU1">
+            <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4"/>
+        </symbol>
     </svg>
+
     <!-- Settings Modal -->
     <div id="settings-modal" class="settings-modal">
         <div class="settings-content">
@@ -98,14 +107,14 @@ $conn->close();
             <button id="close-settings">Close</button>
         </div>
     </div>
-    <script ></script>
 
     <!-- Header Navigation -->
     <script defer src="../bar/script.js"></script>
     <script defer src="../setting/script.js"></script>
+
     <!-- Content Section -->
-    <section class="content-section">
-        <h1>Online Identity & Digital Footprint</h1>
+    <section id="content1" class="content-section active">
+        <h1>1|Online Identity & Digital Footprint</h1>
 
         <div class="content-text">
             <p><strong>1. อัตลักษณ์ออนไลน์คืออะไร?</strong><br>
@@ -127,15 +136,60 @@ $conn->close();
         </div>
     </section>
 
+    <section id="content2" class="content-section">
+        <h1>วิธีปกป้องอัตลักษณ์ออนไลน์</h1>
+
+        <div class="content-text">
+            <p><strong>4. วิธีปกป้องอัตลักษณ์ออนไลน์</strong></p>
+            <ul>
+                <li>ตรวจสอบการตั้งค่าความเป็นส่วนตัวในโซเชียลมีเดีย</li>
+                <li>หลีกเลี่ยงการโพสต์ข้อมูลส่วนตัวที่ละเอียดอ่อน</li>
+                <li>ใช้รหัสผ่านที่ปลอดภัยและไม่ซ้ำกันในแต่ละบัญชี</li>
+                <li>จำกัดการเข้าถึงโพสต์เก่าๆ ที่อาจมีข้อมูลสำคัญ</li>
+                <li>ค้นหาชื่อตัวเองใน Google เพื่อตรวจสอบว่ามีข้อมูลใดหลุดออกไปบ้าง</li>
+            </ul>
+        </div>
+    </section>
+
     <!-- Footer Buttons -->
     <footer class="footer-buttons">
-        <button class="back-button" onclick="window.location.href='../home.php'">back</button>
-        <button class="next-button" onclick="window.location.href='p2.php'">next</button>
+        <button class="back-button" onclick="handleBackButton()">back</button>
+        <button class="next-button" onclick="handleNextButton()">next</button>
     </footer>
+
     <audio id="bgm" loop autoplay muted>
         <source src="../../../assets/sound/bgm.mp3" type="audio/mpeg">
     </audio>
     <script src="../dashboard/script.js"></script>
-<script src="setting/script.js"></script>
+    <script>
+        let currentContent = 'content1'; // เริ่มต้นที่ส่วนแรก
+
+        function showContent(contentId) {
+            // ซ่อนเนื้อหาทั้งหมด
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // แสดงเนื้อหาที่ต้องการ
+            document.getElementById(contentId).classList.add('active');
+            currentContent = contentId; // อัปเดตส่วนที่แสดงอยู่
+        }
+
+        function handleBackButton() {
+            if (currentContent === 'content1') {
+                window.location.href = '../home.php'; // ไปหน้า home.php
+            } else if (currentContent === 'content2') {
+                showContent('content1'); // กลับไปส่วนแรก
+            }
+        }
+
+        function handleNextButton() {
+            if (currentContent === 'content1') {
+                showContent('content2'); // ไปส่วนที่สอง
+            } else if (currentContent === 'content2') {
+                window.location.href = 'lab_unit.php'; // ไปหน้า lab_unit.php
+            }
+        }
+    </script>
 </body>
 </html>

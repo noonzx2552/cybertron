@@ -36,7 +36,7 @@ $unit1_score = $row['Unit1']; // คะแนน Unit1 ปัจจุบัน
 // ตรวจสอบคำตอบที่ส่งมาทาง POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["answer"])) {
     $user_answer = trim($_POST["answer"]);
-    $correct_answer = "flag{correct_answer}"; // กำหนดคำตอบที่ถูกต้อง
+    $correct_answer = 'flag{$Erasdxc623_o0p}'; // กำหนดคำตอบที่ถูกต้อง
 
     if ($user_answer === $correct_answer) {
         // ถ้าผู้ใช้ตอบถูกต้อง ให้บันทึก chapter_1_status เป็น "completed"
@@ -72,7 +72,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Unit 1: Online Identity & Digital Footprint</title>
+    <title>Lab Unit 1</title>
     <link rel="stylesheet" href="../css/labunit.css"> <!-- Link to the CSS file -->
     <link rel="stylesheet" href="../bar/style.css"> <!-- Link to the CSS file -->
 </head>
@@ -116,7 +116,7 @@ $conn->close();
 
 
     <section class="content-section">
-        <h1>Lab unit 6: Cybersecurity & Threat Prevention</h1>
+        <h1>Lab unit 1: Cybersecurity & Threat Prevention</h1>
 
         <div class="content-text">
             <p><strong>ตามหาข้อมูลจาก social media ของ username : @supersigma777</strong></p>
@@ -142,9 +142,13 @@ $conn->close();
         <div class="popup-content">
             <span class="close-popup" onclick="closePopup('correct-popup')">&times;</span>
             <p>Correct! Well done! 🎉</p>
-            <img src="thumbs-up.png" alt="Thumbs Up" class="popup-image">
+
+            <!-- เพิ่มปุ่ม Back to Home --><br>
+            <button onclick="window.location.href='../home.php'" class="backtohome">Back to Home</button>
         </div>
     </div>
+
+
 
     <!-- Pop-up for Incorrect Answer -->
     <div id="incorrect-popup" class="popup">
